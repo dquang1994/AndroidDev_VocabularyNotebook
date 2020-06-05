@@ -2,6 +2,7 @@ package com.example.vocabularynotebook;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList<MainMenuItem> items = new ArrayList<MainMenuItem>();
+    private static final int MYVOCA = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +41,10 @@ public class MainActivity extends AppCompatActivity {
         {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int whichItem, long id) {
-                //view is view of item clicked
-                // whichItem is index of item clicked, corresponding with index of item in array of adapter
+                if(whichItem == MYVOCA){
+                    Intent intent = new Intent(getApplicationContext(), MyVocabularyActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }
