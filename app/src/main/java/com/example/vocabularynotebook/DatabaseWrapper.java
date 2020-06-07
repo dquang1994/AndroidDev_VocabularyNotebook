@@ -1,14 +1,15 @@
 package com.example.vocabularynotebook;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseWrapper {
-    private static final String TABLE_NAME = "VOCABULARY";
-    private static final String COL_ENGLISH = "ENGLISH";
-    private static final String COL_VIETNAMESE = "VIETNAMESE";
+    public static final String TABLE_NAME = "VOCABULARY";
+    public static final String COL_ENGLISH = "ENGLISH";
+    public static final String COL_VIETNAMESE = "VIETNAMESE";
 
     private SQLiteDatabase db;
 
@@ -19,9 +20,16 @@ public class DatabaseWrapper {
 
     public Cursor selectAll() {
         Cursor cursor = db.query(TABLE_NAME,
-                new String[] {COL_ENGLISH, COL_VIETNAMESE},
+                new String[] {"_id", COL_ENGLISH, COL_VIETNAMESE},
                 null, null, null, null, null);
         return cursor;
+    }
+
+    public void insertWord(String en, String vn){
+        ContentValues values = new ContentValues();
+        values.put(COL_ENGLISH, en);
+        values.put(COL_VIETNAMESE, vn);
+        db.insert(TABLE_NAME, null, values);
     }
 
     public void closeDatabase(){

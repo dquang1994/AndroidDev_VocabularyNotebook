@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">Vocabulary Notebook</string>
-    <string name="action_add">Add new vocabulary</string>
-    <string name="my_vocabulary_label">My Vocabulary</string>
+    <string name="main_menu_item_lb_my_vocabulary">My Vocabulary</string>
+    <string name="main_menu_item_lb_game">Game</string>
+    <string name="main_menu_item_lb_setting">Setting</string>
+    <string name="action_bar_my_vocabulary_activity_action_add">Add new vocabulary</string>
+    <string name="my_vocabulary_activity__label">My Vocabulary</string>
+    <string name="word_addition_dialog_lb_eng">English</string>
+    <string name="word_addition_dialog_lb_vn">Vietnamese</string>
+    <string name="word_addition_dialog_lb_ok">Ok</string>
+    <string name="word_addition_dialog_lb_cancel">Cancel</string>
+    <string name="word_addition_dialog_lb">Add a new word</string>
 </resources>

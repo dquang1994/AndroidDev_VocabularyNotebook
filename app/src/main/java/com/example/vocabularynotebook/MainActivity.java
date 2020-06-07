@@ -25,9 +25,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MainMenuItem item1 = new MainMenuItem(R.drawable.baseline_list_black_48, "My vocabulary");
-        MainMenuItem item2 = new MainMenuItem(R.drawable.baseline_games_black_48, "Game");
-        MainMenuItem item3 = new MainMenuItem(R.drawable.baseline_settings_black_48, "Setting");
+        MainMenuItem item1 = new MainMenuItem(R.drawable.baseline_list_black_48, getString(R.string.main_menu_item_lb_my_vocabulary));
+        MainMenuItem item2 = new MainMenuItem(R.drawable.baseline_games_black_48, getString(R.string.main_menu_item_lb_game));
+        MainMenuItem item3 = new MainMenuItem(R.drawable.baseline_settings_black_48, getString(R.string.main_menu_item_lb_setting));
 
         items.add(item1);
         items.add(item2);
