@@ -11,6 +11,7 @@ import android.widget.EditText;
 import androidx.fragment.app.DialogFragment;
 
 public class WordAdditionDialog extends DialogFragment {
+    WordAdditionDialogCallback callback;
     DatabaseWrapper databaseWrapper;
 
     @Override
@@ -34,6 +35,7 @@ public class WordAdditionDialog extends DialogFragment {
                 String eng = etxtEng.getText().toString();
                 String vn = etxtVn.getText().toString();
                 databaseWrapper.insertWord(eng, vn);
+                callback.onOkClick();
                 dismiss();
             }
         });
@@ -52,5 +54,13 @@ public class WordAdditionDialog extends DialogFragment {
     public void onStop() {
         super.onStop();
         databaseWrapper.closeDatabase();
+    }
+
+    public void setCallback(WordAdditionDialogCallback callback){
+        this.callback = callback;
+    }
+
+    public interface WordAdditionDialogCallback {
+        public void onOkClick();
     }
 }

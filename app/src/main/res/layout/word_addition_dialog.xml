@@ -32,8 +32,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="200dp"
-        android:layout_marginTop="50dp">
+        android:layout_marginLeft="180dp"
+        android:layout_marginTop="40dp"
+        android:hint="word"
+        android:textSize="20sp">
     </EditText>
 
     <EditText
@@ -42,9 +44,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="200dp"
-        android:layout_marginTop="100dp">
-    </EditText>
+        android:layout_marginLeft="180dp"
+        android:layout_marginTop="88dp"
+        android:hint="meaning"
+        android:textSize="20sp"></EditText>
 
     <Button
         android:id="@+id/btnOk"

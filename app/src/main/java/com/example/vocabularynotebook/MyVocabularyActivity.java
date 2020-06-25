@@ -18,9 +18,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
-public class MyVocabularyActivity extends AppCompatActivity {
-    DatabaseWrapper databaseWrapper;
-    WordAdditionDialog dialog;
+public class MyVocabularyActivity extends AppCompatActivity implements WordAdditionDialog.WordAdditionDialogCallback{
+    private DatabaseWrapper databaseWrapper;
+    private WordAdditionDialog dialog;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,31 +30,16 @@ public class MyVocabularyActivity extends AppCompatActivity {
 
         databaseWrapper = new DatabaseWrapper(this);
         dialog = new WordAdditionDialog();
-
-        /*Button button = findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Cursor cursor = databaseWrapper.selectAll();
-                if(cursor.moveToFirst()) {
-                    Log.i("Debug", cursor.getString(0));
-                    Log.i("Debug", cursor.getString(1));
-                }
-            }
-        });*/
+        dialog.setCallback(this);
 
         Cursor cursor = databaseWrapper.selectAll();
-        //cursor.moveToFirst();
-        /*Log.i("Debug", cursor.getString(1));
-        Log.i("Debug", cursor.getString(2));*/
-
         CursorAdapter adapter = new SimpleCursorAdapter(this,
                 android.R.layout.simple_list_item_2,
                 cursor,
                 new String[]{DatabaseWrapper.COL_ENGLISH, DatabaseWrapper.COL_VIETNAMESE},
                 new int[]{android.R.id.text1, android.R.id.text2},
                 0);
-        ListView listView = findViewById(R.id.voca_list);
+        listView = findViewById(R.id.voca_list);
         listView.setAdapter(adapter);
 
         /*CursorAdapter adapter = new SimpleCursorAdapter(this,
@@ -64,6 +50,13 @@ public class MyVocabularyActivity extends AppCompatActivity {
                 0);
         ListView listView = findViewById(R.id.voca_list);
         listView.setAdapter(adapter);*/
+    }
+
+    @Override
+    public void onOkClick() {
+        CursorAdapter adapter = (CursorAdapter) listView.getAdapter();
+        Cursor newCursor = databaseWrapper.selectAll();
+        adapter.changeCursor(newCursor);
     }
 
     @Override
