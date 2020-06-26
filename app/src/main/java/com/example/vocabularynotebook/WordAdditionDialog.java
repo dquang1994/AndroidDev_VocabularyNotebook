@@ -22,18 +22,16 @@ public class WordAdditionDialog extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.word_addition_dialog, null);
 
-        final EditText etxtEng = dialogView.findViewById(R.id.etxtEng);
-        final EditText etxtVn = dialogView.findViewById(R.id.etxtVn);
-        Button btnOk = dialogView.findViewById(R.id.btnOk);
-        Button btnCancel = dialogView.findViewById(R.id.btnCancel);
-
-        builder.setView(dialogView).setMessage(getString(R.string.word_addition_dialog_lb));
+        final EditText etxtNewWord = dialogView.findViewById(R.id.word_addition_dialog_input_new_word);
+        final EditText etxtMeaning = dialogView.findViewById(R.id.word_addition_dialog_input_meaning);
+        Button btnOk = dialogView.findViewById(R.id.word_addition_dialog_btn_ok);
+        Button btnCancel = dialogView.findViewById(R.id.word_addition_dialog_btn_cancel);
 
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String eng = etxtEng.getText().toString();
-                String vn = etxtVn.getText().toString();
+                String eng = etxtNewWord.getText().toString();
+                String vn = etxtMeaning.getText().toString();
                 databaseWrapper.insertWord(eng, vn);
                 callback.onOkClick();
                 dismiss();
@@ -46,6 +44,8 @@ public class WordAdditionDialog extends DialogFragment {
                 dismiss();
             }
         });
+
+        builder.setView(dialogView);
 
         return builder.create();
     }

@@ -20,8 +20,8 @@ import android.widget.SimpleCursorAdapter;
 
 public class MyVocabularyActivity extends AppCompatActivity implements WordAdditionDialog.WordAdditionDialogCallback{
     private DatabaseWrapper databaseWrapper;
-    private WordAdditionDialog dialog;
-    private ListView listView;
+    private WordAdditionDialog wordAdditionDialog;
+    private ListView vocabularyList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +29,8 @@ public class MyVocabularyActivity extends AppCompatActivity implements WordAddit
         setContentView(R.layout.activity_my_vocabulary);
 
         databaseWrapper = new DatabaseWrapper(this);
-        dialog = new WordAdditionDialog();
-        dialog.setCallback(this);
+        wordAdditionDialog = new WordAdditionDialog();
+        wordAdditionDialog.setCallback(this);
 
         Cursor cursor = databaseWrapper.selectAll();
         CursorAdapter adapter = new SimpleCursorAdapter(this,
@@ -39,22 +39,13 @@ public class MyVocabularyActivity extends AppCompatActivity implements WordAddit
                 new String[]{DatabaseWrapper.COL_ENGLISH, DatabaseWrapper.COL_VIETNAMESE},
                 new int[]{android.R.id.text1, android.R.id.text2},
                 0);
-        listView = findViewById(R.id.voca_list);
-        listView.setAdapter(adapter);
-
-        /*CursorAdapter adapter = new SimpleCursorAdapter(this,
-                R.layout.activity_my_vocabulary,
-                cursor,
-                new String[]{DatabaseWrapper.COL_ENGLISH, DatabaseWrapper.COL_VIETNAMESE},
-                new int[]{R.id.txtMyVocaEng, R.id.txtMyVocaVn},
-                0);
-        ListView listView = findViewById(R.id.voca_list);
-        listView.setAdapter(adapter);*/
+        vocabularyList = findViewById(R.id.activity_my_vocabulary_vocabulary_list);
+        vocabularyList.setAdapter(adapter);
     }
 
     @Override
     public void onOkClick() {
-        CursorAdapter adapter = (CursorAdapter) listView.getAdapter();
+        CursorAdapter adapter = (CursorAdapter) vocabularyList.getAdapter();
         Cursor newCursor = databaseWrapper.selectAll();
         adapter.changeCursor(newCursor);
     }
@@ -76,7 +67,7 @@ public class MyVocabularyActivity extends AppCompatActivity implements WordAddit
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_add:
-                dialog.show(getSupportFragmentManager(), "");
+                wordAdditionDialog.show(getSupportFragmentManager(), "");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

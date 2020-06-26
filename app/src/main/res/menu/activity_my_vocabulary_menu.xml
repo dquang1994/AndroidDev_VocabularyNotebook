@@ -5,7 +5,7 @@
     tools:context=".MyVocabularyActivity">
 
     <item android:id="@+id/action_add"
-        android:title="@string/action_bar_my_vocabulary_activity_action_add"
+        android:title="@string/my_vocabulary_activity_action_bar_action_add"
         android:icon="@drawable/baseline_add_black_36"
         android:orderInCategory="1"
         app:showAsAction="ifRoom" />

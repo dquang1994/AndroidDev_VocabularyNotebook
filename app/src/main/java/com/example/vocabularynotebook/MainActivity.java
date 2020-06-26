@@ -17,8 +17,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    private ArrayList<MainMenuItem> items = new ArrayList<MainMenuItem>();
-    private static final int MYVOCA = 0;
+    private ArrayList<MainMenuItem> mainMenuItems = new ArrayList<MainMenuItem>();
+    private static final int MY_VOCABULARY = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,19 +29,19 @@ public class MainActivity extends AppCompatActivity {
         MainMenuItem item2 = new MainMenuItem(R.drawable.baseline_games_black_48, getString(R.string.main_menu_item_lb_game));
         MainMenuItem item3 = new MainMenuItem(R.drawable.baseline_settings_black_48, getString(R.string.main_menu_item_lb_setting));
 
-        items.add(item1);
-        items.add(item2);
-        items.add(item3);
+        mainMenuItems.add(item1);
+        mainMenuItems.add(item2);
+        mainMenuItems.add(item3);
 
-        AddressListAdapter adapter = new AddressListAdapter(items);
-        ListView main_menu = findViewById(R.id.main_menu);
-        main_menu.setAdapter(adapter);
+        AddressListAdapter adapter = new AddressListAdapter(mainMenuItems);
+        ListView mainMenu = findViewById(R.id.activity_main_main_menu);
+        mainMenu.setAdapter(adapter);
 
-        main_menu.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        mainMenu.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int whichItem, long id) {
-                if(whichItem == MYVOCA){
+                if(whichItem == MY_VOCABULARY){
                     Intent intent = new Intent(getApplicationContext(), MyVocabularyActivity.class);
                     startActivity(intent);
                 }
@@ -60,11 +60,11 @@ public class MainActivity extends AppCompatActivity {
                 LayoutInflater inflater = (LayoutInflater) getLayoutInflater();
                 view = inflater.inflate(R.layout.main_menu_item, null);
 
-                ImageView imageView = view.findViewById(R.id.imageView);
-                imageView.setImageDrawable(getDrawable(items.get(whichItem).getImageID()));
+                ImageView itemIcon = view.findViewById(R.id.main_menu_item_item_icon);
+                itemIcon.setImageDrawable(getDrawable(mainMenuItems.get(whichItem).getImageID()));
 
-                TextView textView = view.findViewById(R.id.textView);
-                textView.setText(items.get(whichItem).getContent());
+                TextView itemText = view.findViewById(R.id.main_menu_item_item_text);
+                itemText.setText(mainMenuItems.get(whichItem).getContent());
             }
 
             return view;
