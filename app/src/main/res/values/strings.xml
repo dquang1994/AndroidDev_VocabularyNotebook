@@ -14,4 +14,8 @@
     <string name="word_addition_dialog_lb_button_ok">Ok</string>
     <string name="word_addition_dialog_lb_button_cancel">Cancel</string>
     <string name="word_addition_dialog_lb">Add a new word</string>
+
+    <string name="activity_my_vocabulary_item_option_popup_menu_item_name_0">Move to first</string>
+    <string name="activity_my_vocabulary_item_option_popup_menu_item_name_1">Delete</string>
+    <string name="activity_my_vocabulary_item_option_popup_menu_item_name_2">Edit</string>
 </resources>

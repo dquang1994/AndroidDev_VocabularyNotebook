@@ -17,7 +17,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
@@ -35,7 +37,7 @@ public class MyVocabularyActivity extends AppCompatActivity implements WordAddit
         wordAdditionDialog = new WordAdditionDialog();
         wordAdditionDialog.setCallback(this);
 
-        Cursor cursor = databaseWrapper.selectAll();
+        Cursor cursor = databaseWrapper.selectAll(); //Query database
         VocabularyListAdapter adapter = new VocabularyListAdapter(getApplicationContext(), cursor);
         vocabularyList = findViewById(R.id.activity_my_vocabulary_vocabulary_list);
         vocabularyList.setAdapter(adapter);
@@ -44,7 +46,7 @@ public class MyVocabularyActivity extends AppCompatActivity implements WordAddit
     @Override
     public void onOkClick() {
         CursorAdapter adapter = (CursorAdapter) vocabularyList.getAdapter();
-        Cursor newCursor = databaseWrapper.selectAll();
+        Cursor newCursor = databaseWrapper.selectAll(); //Query database
         adapter.changeCursor(newCursor);
     }
 
@@ -56,7 +58,7 @@ public class MyVocabularyActivity extends AppCompatActivity implements WordAddit
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_my_vocabulary_menu, menu);
+        getMenuInflater().inflate(R.menu.activity_my_vocabulary_action_bar_menu, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -93,6 +95,45 @@ public class MyVocabularyActivity extends AppCompatActivity implements WordAddit
             txtWord.setText(cursor.getString(1));
             txtMeaning.setText(cursor.getString(2));
 
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+
+            if(convertView == null) {
+                LayoutInflater inflater = getLayoutInflater();
+                convertView = inflater.inflate(R.layout.vocabulary_list_item, parent, false);
+
+                final ImageButton btnOption = convertView.findViewById(R.id.vocabulary_list_item_btn_option);
+                btnOption.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        PopupMenu popupMenu = new PopupMenu(getApplicationContext(), btnOption);
+                        popupMenu.getMenuInflater().inflate(R.menu.activity_my_vocabulary_item_option_popup_menu, popupMenu.getMenu());
+
+                        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                            public boolean onMenuItemClick(MenuItem item) {
+                                switch (item.getItemId()){
+                                    case R.id.activity_my_vocabulary_item_option_popup_menu_option_0:
+
+                                        break;
+                                    case R.id.activity_my_vocabulary_item_option_popup_menu_option_1:
+                                        break;
+                                    case R.id.activity_my_vocabulary_item_option_popup_menu_option_2:
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                return true;
+                            }
+                        });
+
+                        popupMenu.show();
+                    }
+                });
+            }
+
+            return super.getView(position, convertView, parent);
         }
     }
 }
