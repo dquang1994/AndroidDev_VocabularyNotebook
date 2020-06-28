@@ -5,6 +5,7 @@ import androidx.fragment.app.DialogFragment;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,11 +13,13 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 public class MyVocabularyActivity extends AppCompatActivity implements WordAdditionDialog.WordAdditionDialogCallback{
     private DatabaseWrapper databaseWrapper;
@@ -33,12 +36,7 @@ public class MyVocabularyActivity extends AppCompatActivity implements WordAddit
         wordAdditionDialog.setCallback(this);
 
         Cursor cursor = databaseWrapper.selectAll();
-        CursorAdapter adapter = new SimpleCursorAdapter(this,
-                android.R.layout.simple_list_item_2,
-                cursor,
-                new String[]{DatabaseWrapper.COL_ENGLISH, DatabaseWrapper.COL_VIETNAMESE},
-                new int[]{android.R.id.text1, android.R.id.text2},
-                0);
+        VocabularyListAdapter adapter = new VocabularyListAdapter(getApplicationContext(), cursor);
         vocabularyList = findViewById(R.id.activity_my_vocabulary_vocabulary_list);
         vocabularyList.setAdapter(adapter);
     }
@@ -71,6 +69,30 @@ public class MyVocabularyActivity extends AppCompatActivity implements WordAddit
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public class VocabularyListAdapter extends CursorAdapter{
+        public VocabularyListAdapter(Context context, Cursor c) {
+            super(context, c, 0);
+        }
+
+        @Override
+        public View newView(Context context, Cursor cursor, ViewGroup parent) {
+            LayoutInflater inflater = getLayoutInflater();
+            View view = inflater.inflate(R.layout.vocabulary_list_item, parent, false);
+
+            return view;
+        }
+
+        @Override
+        public void bindView(View view, Context context, Cursor cursor) {
+            TextView txtWord = view.findViewById(R.id.vocabulary_list_item_word);
+            TextView txtMeaning = view.findViewById(R.id.vocabulary_list_item_meaning);
+
+            txtWord.setText(cursor.getString(1));
+            txtMeaning.setText(cursor.getString(2));
+
         }
     }
 }

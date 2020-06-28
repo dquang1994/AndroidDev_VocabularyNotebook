@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         mainMenuItems.add(item2);
         mainMenuItems.add(item3);
 
-        AddressListAdapter adapter = new AddressListAdapter(mainMenuItems);
+        MainMenuAdapter adapter = new MainMenuAdapter(mainMenuItems);
         ListView mainMenu = findViewById(R.id.activity_main_main_menu);
         mainMenu.setAdapter(adapter);
 
@@ -49,9 +49,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public class AddressListAdapter extends ArrayAdapter<MainMenuItem> {
-        public AddressListAdapter(ArrayList<MainMenuItem> items) {
+    public class MainMenuAdapter extends ArrayAdapter<MainMenuItem> {
+        ArrayList<MainMenuItem> mainMenuItems;
+
+        public MainMenuAdapter(ArrayList<MainMenuItem> items) {
             super(getApplicationContext(), R.layout.main_menu_item, items);
+            mainMenuItems = items;
         }
 
         @Override
