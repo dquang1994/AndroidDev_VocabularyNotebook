@@ -25,6 +25,17 @@ public class DatabaseWrapper {
         return cursor;
     }
 
+    public void deleteRow(String word){
+        db.delete(TABLE_NAME, COL_ENGLISH + " = ?", new String[] {word});
+    }
+
+    public void updateRow(String word, String newEng, String newVn){
+        ContentValues values = new ContentValues();
+        values.put(COL_ENGLISH, newEng);
+        values.put(COL_VIETNAMESE, newVn);
+        db.update(TABLE_NAME, values, COL_ENGLISH + " = ?", new String[]{word});
+    }
+
     public void insertWord(String en, String vn){
         ContentValues values = new ContentValues();
         values.put(COL_ENGLISH, en);

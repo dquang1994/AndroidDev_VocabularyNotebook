@@ -12,7 +12,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
-        android:text="@string/word_addition_dialog_dialog_title"
+        android:text="@string/word_addition_dialog_dialog_title_add"
         android:textSize="20sp"></TextView>
 
     <View

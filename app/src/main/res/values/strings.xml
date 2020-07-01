@@ -8,14 +8,13 @@
     <string name="my_vocabulary_activity_action_bar_action_add">Add new vocabulary</string>
     <string name="my_vocabulary_activity_label">My Vocabulary</string>
 
-    <string name="word_addition_dialog_dialog_title">Add a new word</string>
+    <string name="word_addition_dialog_dialog_title_add">Add a new word</string>
+    <string name="word_addition_dialog_dialog_title_edit">Edit your word</string>
     <string name="word_addition_dialog_new_word_lb">New word</string>
     <string name="word_addition_dialog_meaning_lb">Meaning</string>
     <string name="word_addition_dialog_lb_button_ok">Ok</string>
     <string name="word_addition_dialog_lb_button_cancel">Cancel</string>
-    <string name="word_addition_dialog_lb">Add a new word</string>
 
-    <string name="activity_my_vocabulary_item_option_popup_menu_item_name_0">Move to first</string>
     <string name="activity_my_vocabulary_item_option_popup_menu_item_name_1">Delete</string>
     <string name="activity_my_vocabulary_item_option_popup_menu_item_name_2">Edit</string>
 </resources>

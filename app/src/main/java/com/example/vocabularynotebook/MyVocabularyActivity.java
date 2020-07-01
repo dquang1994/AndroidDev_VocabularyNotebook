@@ -67,6 +67,7 @@ public class MyVocabularyActivity extends AppCompatActivity implements WordAddit
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_add:
+                wordAdditionDialog.setTitle(getResources().getString(R.string.word_addition_dialog_dialog_title_add));
                 wordAdditionDialog.show(getSupportFragmentManager(), "");
                 return true;
             default:
@@ -104,6 +105,9 @@ public class MyVocabularyActivity extends AppCompatActivity implements WordAddit
                 LayoutInflater inflater = getLayoutInflater();
                 convertView = inflater.inflate(R.layout.vocabulary_list_item, parent, false);
 
+                final TextView txtWord = convertView.findViewById(R.id.vocabulary_list_item_word);
+                final TextView txtMeaning  = convertView.findViewById(R.id.vocabulary_list_item_meaning);
+
                 final ImageButton btnOption = convertView.findViewById(R.id.vocabulary_list_item_btn_option);
                 btnOption.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -114,16 +118,23 @@ public class MyVocabularyActivity extends AppCompatActivity implements WordAddit
                         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                             public boolean onMenuItemClick(MenuItem item) {
                                 switch (item.getItemId()){
-                                    case R.id.activity_my_vocabulary_item_option_popup_menu_option_0:
-
+                                    case R.id.activity_my_vocabulary_item_option_popup_menu_option_delete:
+                                        databaseWrapper.deleteRow(txtWord.getText().toString());
                                         break;
-                                    case R.id.activity_my_vocabulary_item_option_popup_menu_option_1:
-                                        break;
-                                    case R.id.activity_my_vocabulary_item_option_popup_menu_option_2:
+                                    case R.id.activity_my_vocabulary_item_option_popup_menu_option_edit:
+                                        wordAdditionDialog.setTitle(getResources().getString(R.string.word_addition_dialog_dialog_title_edit));
+                                        wordAdditionDialog.setWord(txtWord.getText().toString());
+                                        wordAdditionDialog.setMeaning(txtMeaning.getText().toString());
+                                        wordAdditionDialog.show(getSupportFragmentManager(), "");
                                         break;
                                     default:
                                         break;
                                 }
+
+                                CursorAdapter adapter = (CursorAdapter) vocabularyList.getAdapter();
+                                Cursor newCursor = databaseWrapper.selectAll(); //Query database
+                                adapter.changeCursor(newCursor);
+
                                 return true;
                             }
                         });
