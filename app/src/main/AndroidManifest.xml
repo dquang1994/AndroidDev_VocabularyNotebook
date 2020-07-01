@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MyVocabularyActivity"
-            android:label="@string/my_vocabulary_activity_label">
+            android:label="@string/my_vocabulary_activity_label"
+            android:parentActivityName=".MyVocabularyActivity">
 
         </activity>
         <activity android:name=".MainActivity"

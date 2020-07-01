@@ -1,5 +1,6 @@
 package com.example.vocabularynotebook;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
@@ -32,6 +33,9 @@ public class MyVocabularyActivity extends AppCompatActivity implements WordAddit
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_vocabulary);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         databaseWrapper = new DatabaseWrapper(this);
         wordAdditionDialog = new WordAdditionDialog();
